@@ -56,6 +56,7 @@ s.Pack={}
 s.Pack[5]={} --Rush Duel
 s.Pack[5][1]={} --Structure Deck
 
+Duel.LoadScript(3910010501)
 --Starter Deck Yuga - Cut Through! Sevens Road!!
 s.Pack[5][1][1]={}
 s.Pack[5][1][1][0]=id+1
