@@ -52,6 +52,7 @@ function s.ChooseDeck(e,tp)
 	end
 end
 
+s.Pack={}
 s.Pack[5]={} --Rush Duel
 s.Pack[5][1]={} --Structure Deck
 
