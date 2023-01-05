@@ -52,11 +52,6 @@ function s.ChooseDeck(e,tp)
 	end
 end
 
-s.initial_effect=(function ()
-	Duel.LoadCardScript(3910010501)
-	return G["c"...3910010501].initial_effect
-end)()
-
 s.Pack={}
 s.Pack[5]={} --Rush Duel
 s.Pack[5][1]={} --Structure Deck
