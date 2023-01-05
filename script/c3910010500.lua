@@ -54,7 +54,7 @@ end
 
 s.initial_effect=(function ()
 	Duel.LoadCardScript(3910010501)
-	return G["c"3910010501].initial_effect
+	return G["c"...3910010501].initial_effect
 end)()
 
 s.Pack={}
