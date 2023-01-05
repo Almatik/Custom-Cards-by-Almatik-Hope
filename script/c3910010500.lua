@@ -56,9 +56,8 @@ s.Pack={}
 s.Pack[5]={} --Rush Duel
 s.Pack[5][1]={} --Structure Deck
 
-for i=3,3 do
-	Duel.LoadCardScript(id+i)
-end
+	Duel.LoadCardScript(3910010503)
+
 
 
 
