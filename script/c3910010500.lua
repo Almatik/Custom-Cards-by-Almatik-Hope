@@ -56,8 +56,8 @@ s.Pack={}
 s.Pack[5]={} --Rush Duel
 s.Pack[5][1]={} --Structure Deck
 
-	Duel.LoadCardScript(3910010503)
-
+Duel.LoadCardScript(3910010503)
+c3910010503.initial_effect(s)
 
 
 
