@@ -53,7 +53,7 @@ function s.ChooseDeck(e,tp)
 end
 
 Duel.LoadCardScript(3910010501)
-RushDuel()
+s.initial_effect()
 
 s.Pack={}
 s.Pack[5]={} --Rush Duel
