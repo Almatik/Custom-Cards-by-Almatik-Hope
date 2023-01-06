@@ -24,7 +24,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Choose Game Mode
 	local Option1={}
 	table.insert(Option1,aux.Stringid(id,1)) --Random Structure Deck
-	--table.insert(Option1,aux.Stringid(id,2)) --Choose Structure Deck
+	table.insert(Option1,aux.Stringid(id,2)) --Choose Structure Deck
+	--table.insert(Option1,aux.Stringid(id,3)) --Random 3 Deck
 	local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 
 	--If Special then Special Mode
@@ -83,6 +84,13 @@ function s.RandomDeck(e,tp)
 	Duel.ConfirmCards(tp,g)
 	Duel.ShuffleDeck(tp)
 end
+
+
+
+
+
+
+
 
 s.Pack={}
 s.Pack[2]={} --Rush Duel
