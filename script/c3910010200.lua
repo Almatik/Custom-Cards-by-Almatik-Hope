@@ -38,17 +38,17 @@ end
 function s.ChooseDeck(e,tp)
 	--Collect All Decks/Packs
 	local decklist={}
-	for i=1,#s.Pack[5][1] do
-		table.insert(decklist,s.Pack[5][1][i][0])
+	for i=1,#s.Pack[2][1] do
+		table.insert(decklist,s.Pack[2][1][i][0])
 	end
 	--Chose a Deck/Pack
 	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
 	if deckid~=nil then
 		local decknum=deckid-id
-		local common=s.Pack[1][1][decknum][1]
-		local rare=s.Pack[1][1][decknum][2]
-		local srare=s.Pack[1][1][decknum][3]
-		local urare=s.Pack[1][1][decknum][4]
+		local common=s.Pack[2][1][decknum][1]
+		local rare=s.Pack[2][1][decknum][2]
+		local srare=s.Pack[2][1][decknum][3]
+		local urare=s.Pack[2][1][decknum][4]
 		if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
 		if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
 		if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
@@ -62,13 +62,13 @@ function s.ChooseDeck(e,tp)
 end
 function s.RandomDeck(e,tp)
 	--Get Random Deck
-	local decknum=Duel.GetRandomNumber(1,#s.Pack[1][1][i][0])
-	local deckid=s.Pack[1][1][decknum][0]
+	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][i][0])
+	local deckid=s.Pack[2][1][decknum][0]
 	--Add Random Deck
-	local common=s.Pack[1][1][decknum][1]
-	local rare=s.Pack[1][1][decknum][2]
-	local srare=s.Pack[1][1][decknum][3]
-	local urare=s.Pack[1][1][decknum][4]
+	local common=s.Pack[2][1][decknum][1]
+	local rare=s.Pack[2][1][decknum][2]
+	local srare=s.Pack[2][1][decknum][3]
+	local urare=s.Pack[2][1][decknum][4]
 	if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
 	if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
 	if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
