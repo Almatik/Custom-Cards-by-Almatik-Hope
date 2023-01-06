@@ -25,12 +25,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local Option1={}
 	table.insert(Option1,aux.Stringid(id,1)) --Random Structure Deck
 	table.insert(Option1,aux.Stringid(id,2)) --Choose Structure Deck
-	--table.insert(Option1,aux.Stringid(id,3)) --Random 3 Deck
+	table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
 	local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 
 	--If Special then Special Mode
 	if gamemod==1 then s.RandomDeck(e,tp) return end
 	if gamemod==2 then s.ChooseDeck(e,tp) return end
+	if gamemod==3 then s.Choose1Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
@@ -84,7 +85,33 @@ function s.RandomDeck(e,tp)
 	Duel.ConfirmCards(tp,g)
 	Duel.ShuffleDeck(tp)
 end
+function s.Choose1Random3(e,tp)
+	--Get Random Deck
+	local num
+	local decklist={}
+	for i=1,3 do
+		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
+		table.insert(decklist,s.Pack[2][1][num][0])
+	end
 
+	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+	if deckid~=nil then
+		local decknum=deckid-id
+		local common=s.Pack[2][1][decknum][1]
+		local rare=s.Pack[2][1][decknum][2]
+		local srare=s.Pack[2][1][decknum][3]
+		local urare=s.Pack[2][1][decknum][4]
+		if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
+		if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
+		if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
+		for code,code2 in ipairs(common) do
+			local tc=Duel.CreateToken(tp,code2)
+			Duel.SendtoDeck(tc,tp,1,REASON_RULE)
+		end
+		local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
+		Duel.ConfirmCards(tp,dg)
+	end
+end
 
 
 
