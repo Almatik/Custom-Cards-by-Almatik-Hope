@@ -62,7 +62,7 @@ function s.ChooseDeck(e,tp)
 end
 function s.RandomDeck(e,tp)
 	--Get Random Deck
-	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][i][0])
+	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
 	local deckid=s.Pack[2][1][decknum][0]
 	--Add Random Deck
 	local common=s.Pack[2][1][decknum][1]
