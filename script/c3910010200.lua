@@ -178,6 +178,7 @@ s.Pack[2][1][9][4]={85520851}
 s.Pack[2][1][9][5]={}
 s.Pack[2][1][9][10]=40
 
+
 --Structure Deck: Machine Re-Volt
 s.Pack[2][1][10]={}
 s.Pack[2][1][10][0]=id+10
