@@ -23,13 +23,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 
 	--Choose Game Mode
 	local Option1={}
-	table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
-	table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
+	table.insert(Option1,aux.Stringid(id,1)) --Random Structure Deck
+	--table.insert(Option1,aux.Stringid(id,2)) --Choose Structure Deck
 	local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 
 	--If Special then Special Mode
-	if gamemod==1 then s.ChooseDeck(e,tp) return end
-	if gamemod==2 then s.RandomDeck(e,tp) return end
+	if gamemod==1 then s.RandomDeck(e,tp) return end
+	if gamemod==2 then s.ChooseDeck(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
