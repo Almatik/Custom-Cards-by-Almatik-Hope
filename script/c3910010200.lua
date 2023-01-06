@@ -45,6 +45,8 @@ function s.ChooseDeck(e,tp)
 	--Chose a Deck/Pack
 	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
 	if deckid~=nil then
+		local sd=Duel.CreateToken(tp,deckid)
+		Duel.MoveToField(sd,tp,tp,LOCATION_MZONE,POS_FACEUP_ATTACK,true)
 		local decknum=deckid-id
 		local common=s.Pack[2][1][decknum][1]
 		local rare=s.Pack[2][1][decknum][2]
@@ -59,12 +61,16 @@ function s.ChooseDeck(e,tp)
 		end
 		local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
 		Duel.ConfirmCards(tp,dg)
+		local sg=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
+		Duel.SendtoDeck(sg,tp,-2,REASON_RULE)
 	end
 end
 function s.RandomDeck(e,tp)
 	--Get Random Deck
 	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
 	local deckid=s.Pack[2][1][decknum][0]
+	local sd=Duel.CreateToken(tp,deckid)
+	Duel.MoveToField(sd,tp,tp,LOCATION_MZONE,POS_FACEUP_ATTACK,true)
 	--Add Random Deck
 	local common=s.Pack[2][1][decknum][1]
 	local rare=s.Pack[2][1][decknum][2]
@@ -83,6 +89,8 @@ function s.RandomDeck(e,tp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
 	Duel.ConfirmCards(tp,g)
 	Duel.ShuffleDeck(tp)
+	local sg=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
+	Duel.SendtoDeck(sg,tp,-2,REASON_RULE)
 end
 
 
