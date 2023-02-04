@@ -98,9 +98,7 @@ end
 
 
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if ep==tp then
-		Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,ev)
-	end
+	Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,ev)
 end
 function s.recfilter(c,e,tp,lp)
 	return c:IsSetCard(0x8e) and c:IsFaceup()
