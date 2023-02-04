@@ -15,8 +15,8 @@ end
 s.listed_names={id}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lp=Duel.GetLP(tp)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,e,tp)
 	local t={}
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,e,tp)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		if lp>tc:GetAttack() then
