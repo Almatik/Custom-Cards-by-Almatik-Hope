@@ -54,6 +54,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		table.insert(t,tc:GetAttack())
 	end
 	local cost=Duel.AnnounceNumber(tp,table.unpack(t))
+	Duel.PayLPCost(tp,cost)
 	e:SetLabel(cost)
 end
 function s.spfilter1(c,e,tp)
