@@ -12,6 +12,15 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
+	--gain atk
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCode(EVENT_PAY_LPCOST)
+	e2:SetCondition(s.atkcd)
+	e2:SetOperation(s.atkop)
+	c:RegisterEffect(e2)
 end
 s.listed_series={0x8e}
 function s.costfilter(c,e,tp,lp)
@@ -51,4 +60,21 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
+end
+
+
+
+
+
+function s.atkcd(e,tp,eg,ep,ev,re,r,rp)
+	return tp==ep
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	e1:SetValue(ev)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
+	c:RegisterEffect(e1)
 end
