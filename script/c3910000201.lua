@@ -23,6 +23,7 @@ function s.initial_effect(c)
 	--check op
 	local e3a=Effect.CreateEffect(c)
 	e3a:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e3a:SetRange(0x5f)
 	e3a:SetCode(EVENT_PAY_LPCOST)
 	e3a:SetOperation(s.checkop)
 	c:RegisterEffect(e3a)
