@@ -15,7 +15,7 @@ s.listed_series={0x8e}
 function s.costfilter(c,lp)
 	return c:IsSetCard(0x8e) and c:IsAttackBelow(lp)
 end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lp=Duel.GetLP()
 	local t={}
 	if chk==0 then return Duel.CheckLPCost(tp,100)
