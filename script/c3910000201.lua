@@ -99,8 +99,7 @@ end
 
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	if ep==tp then
-		repeat Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,1)
-		until Duel.GetFlagEffect(tp,id)==ev
+		Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,ev)
 	end
 end
 function s.recfilter(c,e,tp,lp)
@@ -120,5 +119,4 @@ end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Recover(p,d,REASON_EFFECT)
-	s.lp=0
 end
