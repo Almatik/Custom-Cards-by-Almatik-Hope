@@ -34,7 +34,7 @@ function s.filter(c,e,tp)
 end
 function s.spfilter(c,e,tp,val)
 	return c:IsSetCard(0x8e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and c:GetAttack==val
+		and c:GetAttack=val
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local val=e:GetLabel()
