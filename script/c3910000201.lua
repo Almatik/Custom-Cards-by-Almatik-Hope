@@ -14,13 +14,29 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--gain atk
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EVENT_PAY_LPCOST)
-	e2:SetCondition(s.atkcd)
 	e2:SetOperation(s.atkop)
 	c:RegisterEffect(e2)
+	--check op
+	local e3a=Effect.CreateEffect(c)
+	e3a:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e3a:SetCode(EVENT_PAY_LPCOST)
+	e3a:SetOperation(s.checkop)
+	c:RegisterEffect(e3a)
+	local e3b=Effect.CreateEffect(c)
+	e3b:SetCategory(CATEGORY_RECOVER)
+	e3b:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e3b:SetCode(EVENT_PHASE+PHASE_END)
+	e3b:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3b:SetRange(LOCATION_MZONE)
+	e3b:SetCountLimit(1)
+	e3b:SetCondition(s.reccon)
+	e3b:SetTarget(s.rectg)
+	e3b:SetOperation(s.recop)
+	c:RegisterEffect(e3b)
 end
 s.listed_series={0x8e}
 function s.costfilter(c,e,tp,lp)
@@ -66,9 +82,6 @@ end
 
 
 
-function s.atkcd(e,tp,eg,ep,ev,re,r,rp)
-	return tp==ep
-end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
@@ -78,3 +91,27 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1)
 end
+
+
+
+function s.checkop(e,tp,eg,ep,ev,re,r,rp)
+	if ep==tp then
+		s.lp=s.lp+0
+	end
+end
+function s.reccon(e,tp,eg,ep,ev,re,r,rp)
+	return s.lp>0
+end
+function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(s.lp)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,s.lp)
+end
+function s.recop(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Recover(p,d,REASON_EFFECT)
+	s.lp=0
+end
+
+s.lp=0
