@@ -22,7 +22,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,lp) end
 	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_HAND,0,nil,lp)
 	local tc=g:GetFirst()
-	for tc in aix.Next(g) do
+	for tc in aux.Next(g) do
 		table.insert(t,tc:GetAttack())
 	end
 	local cost=Duel.AnnounceNumber(tp,table.unpack(t))
