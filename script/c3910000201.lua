@@ -30,7 +30,8 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local cost=Duel.AnnounceNumber(tp,table.unpack(t))
 	Duel.PayLPCost(tp,cost)
-	e:SetLabel(cost)
+	local gc=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp,cost)
+	e:SetLabelObject(gc)
 end
 function s.spfilter(c,e,tp,val)
 	return c:IsSetCard(0x8e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
