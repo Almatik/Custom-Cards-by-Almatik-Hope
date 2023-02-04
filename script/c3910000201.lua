@@ -23,8 +23,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 			table.insert(t,tc:GetAttack())
 		end
 	end
-	local min=t:GetMinGroup(Card.GetAttack)
-	if chk==0 then return Duel.CheckLPCost(tp,min) end
+	if chk==0 then return Duel.CheckLPCost(tp,100) end
 	local cost=Duel.AnnounceNumber(tp,table.unpack(t))
 	Duel.PayLPCost(tp,cost)
 	e:SetLabel(cost)
