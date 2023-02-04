@@ -16,7 +16,7 @@ function s.costfilter(c,lp)
 	return c:IsSetCard(0x8e) and c:IsAttackBelow(lp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local lp=Duel.GetLP()
+	local lp=Duel.GetLP(tp)
 	local t={}
 	if chk==0 then return Duel.CheckLPCost(tp,100)
 		and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,lp) end
