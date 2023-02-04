@@ -29,8 +29,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 
 	--If Special then Special Mode
-	if gamemod==1 then s.RandomDeck(e,tp) return end
-	if gamemod==2 then s.ChooseDeck(e,tp) return end
+	if gamemod==1 then s.ChooseDeck(e,tp) return end
+	if gamemod==2 then s.RandomDeck(e,tp) return end
 	if gamemod==3 then s.Choose1Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
