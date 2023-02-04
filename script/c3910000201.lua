@@ -21,12 +21,13 @@ function s.initial_effect(c)
 	e2:SetOperation(s.atkop)
 	c:RegisterEffect(e2)
 	--check op
-	local e3a=Effect.CreateEffect(c)
-	e3a:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e3a:SetRange(0x5f)
-	e3a:SetCode(EVENT_PAY_LPCOST)
-	e3a:SetOperation(s.checkop)
-	c:RegisterEffect(e3a)
+	aux.GlobalCheck(s,function()
+		local ge1=Effect.CreateEffect(c)
+		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		ge1:SetCode(EVENT_PAY_LPCOST)
+		ge1:SetOperation(s.checkop)
+		Duel.RegisterEffect(ge1,0)
+	end)
 	local e3b=Effect.CreateEffect(c)
 	e3b:SetCategory(CATEGORY_RECOVER)
 	e3b:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -98,22 +99,20 @@ end
 
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	if ep==tp then
-		s.lp=s.lp+0
+		Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,1)*ev
 	end
 end
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
-	return s.lp>0
+	return Duel.GetFlagEffect(tp,id)>0
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(s.lp)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,s.lp)
+	Duel.SetTargetParam(Duel.GetFlagEffect(tp,id))
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,Duel.GetFlagEffect(tp,id))
 end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Recover(p,d,REASON_EFFECT)
 	s.lp=0
 end
-
-s.lp=0
