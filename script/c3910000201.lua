@@ -103,8 +103,13 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 		until Duel.GetFlagEffect(tp,id)==ev
 	end
 end
+function s.recfilter(c,e,tp,lp)
+	return c:IsSetCard(0x8e) and c:IsFaceup()
+end
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
 	return Duel.GetFlagEffect(tp,id)>0
+		and #g>0 and g:FilterCount(s.recfilter,nil)==#g
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
