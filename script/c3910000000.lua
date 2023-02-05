@@ -35,5 +35,6 @@ end
 function s.tagop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.TagSwap(tp)
+	Duel.Damage(tp,8000,REASON_RULE)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 end
