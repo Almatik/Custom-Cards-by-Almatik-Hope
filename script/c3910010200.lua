@@ -165,13 +165,6 @@ function s.Choose2Random3(e,tp)
 	e1:SetCode(EVENT_ADJUST)
 	e1:SetOperation(s.RelayOp(startlp,deckidlist[2]))
 	Duel.RegisterEffect(e1,tp)
-	local e2=e1:Clone()
-	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	e2:SetCode(EVENT_CHAIN_SOLVED)
-	Duel.RegisterEffect(e2,tp)
-	local e3=e2:Clone()
-	e3:SetCode(EVENT_DAMAGE)
-	Duel.RegisterEffect(e3,tp)
 	Duel.Damage(tp,8000,REASON_RULE)
 end
 function s.RelayOp(startlp,deckid)
@@ -205,7 +198,6 @@ function s.RelayOp(startlp,deckid)
 						Duel.SkipPhase(1-tp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)
 						Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_END,1)
 					end
-					Duel.Damage(tp,8000,REASON_RULE)
 				end
 			end
 end
