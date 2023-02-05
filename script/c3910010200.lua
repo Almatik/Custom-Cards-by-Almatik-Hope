@@ -222,7 +222,7 @@ end
 
 
 s.Pack={}
-s.Pack[2]={} --Rush Duel
+s.Pack[2]={} --TCG
 s.Pack[2][1]={} --Structure Deck
 
 --Structure Deck: Zombie Madness
