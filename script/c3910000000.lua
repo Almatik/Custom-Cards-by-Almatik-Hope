@@ -34,6 +34,6 @@ function s.tagcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tagop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
-	Duel.TagSwap(1)
+	Duel.TagSwap(tp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 end

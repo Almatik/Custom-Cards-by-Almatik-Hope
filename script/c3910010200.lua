@@ -33,6 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
 		table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
 		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
+		table.insert(Option1,aux.Stringid(id,4)) --Choose 2 of 3 Random Deck
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 		for tp=0,1 do s[tp]=gamemod end
 	end
@@ -129,6 +130,18 @@ function s.Choose1Random3(e,tp)
 end
 function s.Choose2Random3(e,tp)
 	--Get Random Deck
+	local num
+	local decklist={}
+	for i=1,3 do
+		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
+		table.insert(decklist,s.Pack[2][1][num][0])
+	end
+
+	for i=1,2 do
+		local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+		s.PlaceDeck(tp,deckid)
+		table.remove(decklist,deckid)
+	end
 end
 
 
