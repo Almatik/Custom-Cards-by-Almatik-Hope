@@ -130,20 +130,6 @@ function s.Choose1Random3(e,tp)
 end
 function s.Choose2Random3(e,tp)
 	--Get Random Deck
-	local num
-	local decklist={}
-	for i=1,3 do
-		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
-		table.insert(decklist,s.Pack[2][1][num][0])
-	end
-
-	local s.deckid={}
-	local s.deckid[1]={}
-	local s.deckid[2]={}
-	for i=1,2 do
-		local s.deckid[i]=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
-		table.remove(decklist,s.deckid)
-	end
 end
 
 
