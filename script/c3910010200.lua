@@ -132,7 +132,7 @@ function s.Choose2Random3(e,tp)
 		table.insert(decklist,s.Pack[2][1][num][0])
 	end
 
-	for deck=1,2 do
+
 	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
 	if deckid~=nil then
 		local decknum=deckid-id
