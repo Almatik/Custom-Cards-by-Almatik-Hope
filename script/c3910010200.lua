@@ -40,6 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if s[tp]==1 then s.ChooseDeck(e,tp) return end
 	if s[tp]==2 then s.RandomDeck(e,tp) return end
 	if s[tp]==3 then s.Choose1Random3(e,tp) return end
+	if s[tp]==4 then s.Choose2Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
