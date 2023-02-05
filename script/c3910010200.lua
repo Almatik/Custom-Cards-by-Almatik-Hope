@@ -47,7 +47,8 @@ function s.DeleteDeck(tp)
 	Duel.SendtoDeck(del,tp,-2,REASON_RULE)
 end
 function s.PlaceDeck(tp,deckid)
-	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
+	Duel.Hint(HINT_SKILL,tp,deckid)
+	--Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
 end
 function s.ChooseDeck(e,tp)
 	--Collect All Decks/Packs
