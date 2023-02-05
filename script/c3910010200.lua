@@ -36,12 +36,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 		for tp=0,1 do s[tp]=gamemod end
 	end
-	for tp=0,1 do
-		--If Special then Special Mode
-		if s[tp]==1 then s.ChooseDeck(e,tp) return end
-		if s[tp]==2 then s.RandomDeck(e,tp) return end
-		if s[tp]==3 then s.Choose1Random3(e,tp) return end
-	end
+	--If Special then Special Mode
+	if s[tp]==1 then s.ChooseDeck(e,tp) return end
+	if s[tp]==2 then s.RandomDeck(e,tp) return end
+	if s[tp]==3 then s.Choose1Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
