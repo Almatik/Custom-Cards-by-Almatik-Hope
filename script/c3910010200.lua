@@ -54,6 +54,8 @@ function s.ChooseDeck(e,tp)
 	end
 	--Chose a Deck/Pack
 	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
+	Duel.Hint(HINT_CARD,tp,deckid)
 	if deckid~=nil then
 		local decknum=deckid-id
 		local common=s.Pack[2][1][decknum][1]
@@ -121,6 +123,41 @@ function s.Choose1Random3(e,tp)
 		Duel.ConfirmCards(tp,dg)
 	end
 end
+function s.Choose2Random3(e,tp)
+	--Get Random Deck
+	local num
+	local decklist={}
+	for i=1,3 do
+		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
+		table.insert(decklist,s.Pack[2][1][num][0])
+	end
+
+	for deck=1,2 do
+	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+	if deckid~=nil then
+		local decknum=deckid-id
+		local common=s.Pack[2][1][decknum][1]
+		local rare=s.Pack[2][1][decknum][2]
+		local srare=s.Pack[2][1][decknum][3]
+		local urare=s.Pack[2][1][decknum][4]
+		if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
+		if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
+		if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
+		for code,code2 in ipairs(common) do
+			local tc=Duel.CreateToken(tp,code2)
+			Duel.SendtoDeck(tc,tp,1,REASON_RULE)
+		end
+		local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
+		Duel.ConfirmCards(tp,dg)
+	end
+end
+
+
+
+
+
+
+
 
 
 
