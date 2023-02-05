@@ -175,7 +175,7 @@ function s.Choose2Random3(e,tp)
 	Duel.RegisterEffect(e3,tp)
 	Duel.Damage(tp,8000,REASON_RULE)
 end
-function s.RelayOp(startlp,deckid)
+function s.RelayOp(startlp,decklistid)
 	return  function(e,tp,eg,ep,ev,re,r,rp)
 				if decklistid==nil then return end
 				local deckid=decklistid[1]
