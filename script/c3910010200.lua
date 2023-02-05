@@ -14,8 +14,8 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 	aux.GlobalCheck(s,function()
-		s[0]=nil
-		s[1]=nil
+		s[0]=0
+		s[1]=0
 		s[2]=0
 		s[3]=0
 	end)
