@@ -174,7 +174,7 @@ function s.Choose2Random3(e,tp)
 end
 function s.RelayOp(startlp,deckid)
 	return  function(e,tp,eg,ep,ev,re,r,rp)
-				if Duel.GetLP(tp)<=1 then
+				if Duel.GetLP(tp)<1 then
 					--Delete Your Cards
 					s.DeleteDeck(tp)
 					--Get Random Deck
