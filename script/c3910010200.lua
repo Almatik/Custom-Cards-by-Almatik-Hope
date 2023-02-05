@@ -27,7 +27,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Delete Your Cards
 	s.DeleteDeck(tp)
 
-	if s[tp]==0 then return end
 	--Choose Game Mode
 	local Option1={}
 	table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
