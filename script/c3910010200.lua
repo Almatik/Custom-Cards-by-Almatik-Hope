@@ -27,19 +27,21 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Delete Your Cards
 	s.DeleteDeck(tp)
 
-	--Choose Game Mode
-	local Option1={}
-	table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
-	table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
-	table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
-	local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
-	for tp=0,1 do
-		s[tp]=gamemod
+	if s[tp]==0 then
+		--Choose Game Mode
+		local Option1={}
+		table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
+		table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
+		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
+		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
+		for tp=0,1 do s[tp]=gamemod end
 	end
-	--If Special then Special Mode
-	if gamemod==1 then s.ChooseDeck(e,tp) return end
-	if gamemod==2 then s.RandomDeck(e,tp) return end
-	if gamemod==3 then s.Choose1Random3(e,tp) return end
+	for tp=0,1 do
+		--If Special then Special Mode
+		if s[tp]==1 then s.ChooseDeck(e,tp) return end
+		if s[tp]==2 then s.RandomDeck(e,tp) return end
+		if s[tp]==3 then s.Choose1Random3(e,tp) return end
+	end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
