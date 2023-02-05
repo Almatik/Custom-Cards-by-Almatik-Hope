@@ -185,6 +185,8 @@ function s.RelayOp(startlp,decklistid)
 					s.DeleteDeck(tp)
 					--Get Random Deck
 					s.PlaceDeck(tp,deckid)
+					Duel.SetLP(tp,startlp)
+					Duel.Draw(tp,5,REASON_RULE)
 					if deckid~=nil then
 						local decknum=deckid-id
 						local common=s.Pack[2][1][decknum][1]
@@ -201,8 +203,6 @@ function s.RelayOp(startlp,decklistid)
 						local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
 						Duel.ConfirmCards(tp,dg)
 					end
-					Duel.SetLP(tp,startlp)
-					Duel.Draw(tp,5,REASON_RULE)
 					if Duel.GetTurnPlayer()~=tp then
 						Duel.SkipPhase(1-tp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)
 						Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_END,1)
