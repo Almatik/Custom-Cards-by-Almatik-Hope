@@ -205,6 +205,7 @@ function s.RelayOp(startlp,deckid)
 						Duel.SkipPhase(1-tp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)
 						Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_END,1)
 					end
+					Duel.Damage(tp,8000,REASON_RULE)
 				end
 			end
 end
