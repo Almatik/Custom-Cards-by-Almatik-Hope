@@ -180,7 +180,7 @@ function s.RelayOp(startlp,decklistid)
 				if decklistid==nil then return end
 				local deckid=decklistid[1]
 				if Duel.GetLP(tp)<1 then
-					table.remove(deckidlist,1)
+					table.remove(decklistid,1)
 					--Delete Your Cards
 					s.DeleteDeck(tp)
 					--Get Random Deck
