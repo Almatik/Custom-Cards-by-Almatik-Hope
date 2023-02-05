@@ -138,9 +138,10 @@ function s.Choose2Random3(e,tp)
 	end
 
 	local deckid={}
+	local deckid[1]={}
+	local deckid[2]={}
 	for i=1,2 do
 		local deckid[i]=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
-		s.PlaceDeck(tp,deckid[i])
 		table.remove(decklist,deckid)
 	end
 end
