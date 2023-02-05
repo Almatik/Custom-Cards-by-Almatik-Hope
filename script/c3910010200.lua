@@ -164,7 +164,7 @@ function s.Choose2Random3(e,tp)
 	local e1=Effect.GlobalEffect()
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_ADJUST)
-	e1:SetOperation(s.RelayOp(startlp,deckidlist[1]))
+	e1:SetOperation(s.RelayOp(startlp,deckidlist))
 	Duel.RegisterEffect(e1,tp)
 	local e2=e1:Clone()
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
@@ -177,9 +177,10 @@ function s.Choose2Random3(e,tp)
 end
 function s.RelayOp(startlp,deckid)
 	return  function(e,tp,eg,ep,ev,re,r,rp)
-				if Duel.GetFlagEffect(tp,id)>0 then return end
+				if decklistid==nil then return end
+				local deckid=decklistid[1]
 				if Duel.GetLP(tp)<1 then
-					Duel.RegisterFlagEffect(tp,id,0,0,0)
+					table.remove(deckidlist,1)
 					--Delete Your Cards
 					s.DeleteDeck(tp)
 					--Get Random Deck
