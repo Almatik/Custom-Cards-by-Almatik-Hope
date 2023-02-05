@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
 		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
-		for tp=0,1 do s[tp]=gamemod end
+		for tp=0,1,2,3,4,5 do s[tp]=gamemod end
 	end
 	--If Special then Special Mode
 	if s[tp]==1 then s.ChooseDeck(e,tp) return end
