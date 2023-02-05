@@ -138,9 +138,12 @@ function s.Choose2Random3(e,tp)
 	end
 
 
-	local deckid1,deckid2=Duel.SelectCardsFromCodes(tp,2,2,false,false,table.unpack(decklist))
-	local tc=Duel.CreateToken(tp,deckid2)
-	Duel.SendtoHand(tc,tp,REASON_RULE)
+	local code1,code2=Duel.SelectCardsFromCodes(tp,2,2,false,false,table.unpack(decklist))
+	local code={code1,code2}
+	for i=1,2 do
+		local tc=Duel.CreateToken(tp,code{i})
+		Duel.SendtoHand(tc,tp,REASON_RULE)
+	end
 end
 
 
