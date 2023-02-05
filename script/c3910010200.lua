@@ -141,6 +141,7 @@ function s.Choose2Random3(e,tp)
 	local deckidlist={Duel.SelectCardsFromCodes(tp,2,2,false,false,table.unpack(decklist))}
 	s.PlaceDeck(tp,deckidlist[1])
 	--Play 1 deck
+	local deckid=deckidlist[1]
 	if deckid~=nil then
 		local decknum=deckid-id
 		local common=s.Pack[2][1][decknum][1]
