@@ -37,9 +37,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		s[tp]=gamemod
 	end
 	--If Special then Special Mode
-	if gamemod==s[tp] then s.ChooseDeck(e,tp) return end
-	if gamemod==s[tp] then s.RandomDeck(e,tp) return end
-	if gamemod==s[tp] then s.Choose1Random3(e,tp) return end
+	if gamemod==1 then s.ChooseDeck(e,tp) return end
+	if gamemod==2 then s.RandomDeck(e,tp) return end
+	if gamemod==3 then s.Choose1Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
