@@ -140,7 +140,7 @@ function s.Choose2Random3(e,tp)
 
 	local deckidlist={Duel.SelectCardsFromCodes(tp,2,2,false,false,table.unpack(decklist))}
 	for i=1,2 do
-		Debug.Message(deckidlist[i])
+		s.PlaceDeck(tp,deckidlist[i])
 	end
 end
 
