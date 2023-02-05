@@ -137,12 +137,12 @@ function s.Choose2Random3(e,tp)
 		table.insert(decklist,s.Pack[2][1][num][0])
 	end
 
-	local deckid={}
-	local deckid[1]={}
-	local deckid[2]={}
+	local s.deckid={}
+	local s.deckid[1]={}
+	local s.deckid[2]={}
 	for i=1,2 do
-		local deckid[i]=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
-		table.remove(decklist,deckid)
+		local s.deckid[i]=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
+		table.remove(decklist,s.deckid)
 	end
 end
 
