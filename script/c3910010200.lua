@@ -137,13 +137,73 @@ function s.Choose2Random3(e,tp)
 		table.insert(decklist,s.Pack[2][1][num][0])
 	end
 
-
+	--Choose 2 decks
 	local deckidlist={Duel.SelectCardsFromCodes(tp,2,2,false,false,table.unpack(decklist))}
-	for i=1,2 do
-		s.PlaceDeck(tp,deckidlist[i])
+	s.PlaceDeck(tp,deckidlist[1])
+	--Play 1 deck
+	if deckid~=nil then
+		local decknum=deckid-id
+		local common=s.Pack[2][1][decknum][1]
+		local rare=s.Pack[2][1][decknum][2]
+		local srare=s.Pack[2][1][decknum][3]
+		local urare=s.Pack[2][1][decknum][4]
+		if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
+		if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
+		if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
+		for code,code2 in ipairs(common) do
+			local tc=Duel.CreateToken(tp,code2)
+			Duel.SendtoDeck(tc,tp,1,REASON_RULE)
+		end
+		local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
+		Duel.ConfirmCards(tp,dg)
 	end
+	--Relay Effect
+	local startlp=Duel.GetLP(tp)
+	local e1=Effect.GlobalEffect()
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_ADJUST)
+	e1:SetOperation(s.RelayOp(startlp,deckidlist[2]))
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
+	e2:SetCode(EVENT_CHAIN_SOLVED)
+	Duel.RegisterEffect(e2,tp)
+	local e3=e2:Clone()
+	e3:SetCode(EVENT_DAMAGE)
+	Duel.RegisterEffect(e3,tp)
 end
-
+function s.RelayOp(startlp,deckid)
+	return  function(e,tp,eg,ep,ev,re,r,rp)
+				if Duel.GetLP(tp)<=1 then
+					--Delete Your Cards
+					s.DeleteDeck(tp)
+					--Get Random Deck
+					s.PlaceDeck(tp,deckid)
+					if deckid~=nil then
+						local decknum=deckid-id
+						local common=s.Pack[2][1][decknum][1]
+						local rare=s.Pack[2][1][decknum][2]
+						local srare=s.Pack[2][1][decknum][3]
+						local urare=s.Pack[2][1][decknum][4]
+						if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
+						if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
+						if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
+						for code,code2 in ipairs(common) do
+							local tc=Duel.CreateToken(tp,code2)
+							Duel.SendtoDeck(tc,tp,1,REASON_RULE)
+						end
+						local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
+						Duel.ConfirmCards(tp,dg)
+					end
+					Duel.SetLP(tp,startlp)
+					Duel.Draw(tp,5,REASON_RULE)
+					if Duel.GetTurnPlayer()~=tp then
+						Duel.SkipPhase(1-tp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)
+						Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_END,1)
+					end
+				end
+			end
+end
 
 
 
