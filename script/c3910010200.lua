@@ -48,7 +48,7 @@ function s.DeleteDeck(tp)
 end
 function s.PlaceDeck(tp,deckid)
 	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
-	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
+	Duel.Hint(HINT_CARD,tp,deckid)
 	Duel.Hint(HINT_CARD,tp,deckid)
 end
 function s.ChooseDeck(e,tp)
