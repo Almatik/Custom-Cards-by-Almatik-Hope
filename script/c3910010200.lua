@@ -53,7 +53,7 @@ function s.ChooseDeck(e,tp)
 		table.insert(decklist,s.Pack[2][1][i][0])
 	end
 	--Chose a Deck/Pack
-	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+	local deckid=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
 	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
 	Duel.Hint(HINT_CARD,tp,deckid)
 	if deckid~=nil then
