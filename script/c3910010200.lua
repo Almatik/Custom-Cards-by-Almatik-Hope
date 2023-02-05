@@ -172,6 +172,7 @@ function s.Choose2Random3(e,tp)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_DAMAGE)
 	Duel.RegisterEffect(e3,tp)
+	Duel.Damage(tp,8000,REASON_RULE)
 end
 function s.RelayOp(startlp,deckid)
 	return  function(e,tp,eg,ep,ev,re,r,rp)
