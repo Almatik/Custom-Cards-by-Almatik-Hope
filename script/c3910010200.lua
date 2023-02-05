@@ -177,9 +177,9 @@ function s.Choose2Random3(e,tp)
 end
 function s.RelayOp(startlp,decklistid)
 	return  function(e,tp,eg,ep,ev,re,r,rp)
-				if Duel.GetFlagEffect(tp,id)>1 then return end
-				Duel.RegisterFlagEffect(tp,id,0,0,0)
+				if Duel.GetFlagEffect(tp,id)>0 then return end
 				if Duel.GetLP(tp)<1 then
+					Duel.RegisterFlagEffect(tp,id,0,0,0)
 					--Delete Your Cards
 					s.DeleteDeck(tp)
 					--Get Random Deck
