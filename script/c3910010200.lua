@@ -46,6 +46,10 @@ function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
 	Duel.SendtoDeck(del,tp,-2,REASON_RULE)
 end
+function s.PlaceDeck(tp,deckid)
+	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
+	Duel.Hint(HINT_CARD,tp,deckid)
+end
 function s.ChooseDeck(e,tp)
 	--Collect All Decks/Packs
 	local decklist={}
@@ -54,8 +58,7 @@ function s.ChooseDeck(e,tp)
 	end
 	--Chose a Deck/Pack
 	local deckid=Duel.SelectCardsFromCodes(tp,1,1,false,false,table.unpack(decklist))
-	Duel.Hint(HINT_SKILL_FLIP,tp,deckid|(1<<32))
-	Duel.Hint(HINT_CARD,tp,deckid)
+	s.PlaceDeck(tp,deckid)
 	if deckid~=nil then
 		local decknum=deckid-id
 		local common=s.Pack[2][1][decknum][1]
@@ -77,6 +80,7 @@ function s.RandomDeck(e,tp)
 	--Get Random Deck
 	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
 	local deckid=s.Pack[2][1][decknum][0]
+	s.PlaceDeck(tp,deckid)
 	--Add Random Deck
 	local common=s.Pack[2][1][decknum][1]
 	local rare=s.Pack[2][1][decknum][2]
@@ -106,6 +110,7 @@ function s.Choose1Random3(e,tp)
 	end
 
 	local deckid=Duel.SelectCardsFromCodes(tp,0,1,false,false,table.unpack(decklist))
+	s.PlaceDeck(tp,deckid)
 	if deckid~=nil then
 		local decknum=deckid-id
 		local common=s.Pack[2][1][decknum][1]
