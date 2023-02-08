@@ -34,7 +34,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
 		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
 		table.insert(Option1,aux.Stringid(id,4)) --Choose 2 of 3 Random Deck
-		table.insert(Option1,aux.Stringid(id,5)) --Choose 1 Season Random Deck
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 		for tp=0,1 do s[1][tp]=gamemod end
 	end
@@ -43,7 +42,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if s[1][tp]==2 then s.RandomDeck(e,tp) return end
 	if s[1][tp]==3 then s.Choose1Random3(e,tp) return end
 	if s[1][tp]==4 then s.Choose2Random3(e,tp) return end
-	if s[1][tp]==5 then s.SeasonDeck(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
