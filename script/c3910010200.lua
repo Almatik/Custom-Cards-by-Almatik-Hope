@@ -228,7 +228,7 @@ s.Pack[2][1]={} --Structure Deck
 
 --Structure Deck: Zombie Madness
 
-Duel.LoadScript("c3910010201.lua", true)
+s.Pack[2][1][1]={Duel.LoadScript("c3910010201.lua", true)}
 
 --Structure Deck: Dragon's Roar
 s.Pack[2][1][2]={}
