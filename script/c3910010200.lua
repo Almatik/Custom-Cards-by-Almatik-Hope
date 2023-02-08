@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 	aux.GlobalCheck(s,function()
-		s[0]=0
-		s[1]=0
-		s[2]=0
-		s[3]=0
+		s[1][0]=0
+		s[1][1]=0
+		s[1][2]=0
+		s[1][3]=0
 	end)
 end
 function s.cost(e,tp)
@@ -27,7 +27,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Delete Your Cards
 	s.DeleteDeck(tp)
 
-	if s[tp]==0 then
+	if s[1][tp]==0 then
 		--Choose Game Mode
 		local Option1={}
 		table.insert(Option1,aux.Stringid(id,1)) --Choose Structure Deck
@@ -35,13 +35,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
 		table.insert(Option1,aux.Stringid(id,4)) --Choose 2 of 3 Random Deck
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
-		for tp=0,1 do s[tp]=gamemod end
+		for tp=0,1 do s[1][tp]=gamemod end
 	end
 	--If Special then Special Mode
-	if s[tp]==1 then s.ChooseDeck(e,tp) return end
-	if s[tp]==2 then s.RandomDeck(e,tp) return end
-	if s[tp]==3 then s.Choose1Random3(e,tp) return end
-	if s[tp]==4 then s.Choose2Random3(e,tp) return end
+	if s[1][tp]==1 then s.ChooseDeck(e,tp) return end
+	if s[1][tp]==2 then s.RandomDeck(e,tp) return end
+	if s[1][tp]==3 then s.Choose1Random3(e,tp) return end
+	if s[1][tp]==4 then s.Choose2Random3(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
