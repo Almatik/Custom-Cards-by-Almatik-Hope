@@ -223,7 +223,7 @@ end
 function s.SeasonDeck(e,tp)
 	--Get Random Deck
 	local season=s[2][tp]+2
-	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][][10][season])
+	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][nil][10][season])
 	local deckid=s.Pack[2][1][decknum][0]
 	s.PlaceDeck(tp,deckid)
 	--Add Random Deck
