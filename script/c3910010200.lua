@@ -38,11 +38,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 		for tp=0,1 do s[1][tp]=gamemod end
 		if s[1][tp]==5 then
-			s[2][tp]=Duel.SelectOption(tp,aux.Stringid(id,6),
-												aux.Stringid(id,7),
-												aux.Stringid(id,8),
-												aux.Stringid(id,9),
-												aux.Stringid(id,10))+2
+			s[2][tp]=Duel.SelectOption(tp,aux.Stringid(id+1,2),
+												aux.Stringid(id+1,3),
+												aux.Stringid(id+1,4),
+												aux.Stringid(id+1,5),
+												aux.Stringid(id+1,6),
+												aux.Stringid(id+1,7))+2
 
 		end
 	end
@@ -220,13 +221,6 @@ function s.RelayOp(startlp,deckid)
 			end
 end
 function s.SeasonDeck(e,tp)
-	--Get Random Deck
-	local num
-	local decklist={}
-	for i=1,#s.Pack do
-		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
-		table.insert(decklist,s.Pack[2][1][num][0])
-	end
 	--Get Random Deck
 	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
 	local deckid=s.Pack[2][1][decknum][0]
