@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 												aux.Stringid(id+1,4),
 												aux.Stringid(id+1,5),
 												aux.Stringid(id+1,6),
-												aux.Stringid(id+1,7))+2
+												aux.Stringid(id+1,7))
 
 		end
 	end
@@ -222,7 +222,8 @@ function s.RelayOp(startlp,deckid)
 end
 function s.SeasonDeck(e,tp)
 	--Get Random Deck
-	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
+	local season=s[2][tp]+2
+	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][][10][season])
 	local deckid=s.Pack[2][1][decknum][0]
 	s.PlaceDeck(tp,deckid)
 	--Add Random Deck
