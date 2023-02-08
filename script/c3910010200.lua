@@ -49,6 +49,7 @@ function s.DeleteDeck(tp)
 end
 function s.PlaceDeck(tp,deckid)
 	Duel.Hint(HINT_SKILL,tp,deckid)
+	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 end
 function s.ChooseDeck(e,tp)
 	--Collect All Decks/Packs
@@ -183,8 +184,6 @@ function s.RelayOp(startlp,deckid)
 					s.DeleteDeck(tp)
 					--Get Random Deck
 					s.PlaceDeck(tp,deckid)
-					Duel.SetLP(tp,startlp)
-					Duel.Draw(tp,5,REASON_RULE)
 					if deckid~=nil then
 						local decknum=deckid-id
 						local common=s.Pack[2][1][decknum][1]
@@ -200,6 +199,8 @@ function s.RelayOp(startlp,deckid)
 						end
 						local dg=Duel.GetFieldGroup(tp,LOCATION_DECK+LOCATION_EXTRA,0)
 						Duel.ConfirmCards(tp,dg)
+						Duel.Draw(tp,5,REASON_RULE)
+						Duel.SetLP(tp,startlp)
 					end
 					if Duel.GetTurnPlayer()~=tp then
 						Duel.SkipPhase(1-tp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)
