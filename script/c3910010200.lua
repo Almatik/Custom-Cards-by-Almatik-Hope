@@ -220,31 +220,6 @@ function s.RelayOp(startlp,deckid)
 				end
 			end
 end
-function s.SeasonDeck(e,tp)
-	--Get Random Deck
-	local season=s[2][tp]+2
-	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1][nil][10][season])
-	local deckid=s.Pack[2][1][decknum][0]
-	s.PlaceDeck(tp,deckid)
-	--Add Random Deck
-	local common=s.Pack[2][1][decknum][1]
-	local rare=s.Pack[2][1][decknum][2]
-	local srare=s.Pack[2][1][decknum][3]
-	local urare=s.Pack[2][1][decknum][4]
-	if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
-	if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
-	if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
-	for code,code2 in ipairs(common) do
-		--Debug.AddCard(code2,tp,tp,LOCATION_DECK,1,POS_FACEDOWN):Cover(deckid)
-		local tc=Duel.CreateToken(tp,code2)
-		--tc:Cover(deckid)
-		Duel.SendtoDeck(tc,tp,1,REASON_RULE)
-	end
-	--Debug.ReloadFieldEnd()
-	local g=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
-	Duel.ConfirmCards(tp,g)
-	Duel.ShuffleDeck(tp)
-end
 
 
 
