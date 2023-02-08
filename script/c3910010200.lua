@@ -34,14 +34,24 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(Option1,aux.Stringid(id,2)) --Random Structure Deck
 		table.insert(Option1,aux.Stringid(id,3)) --Choose 1 of 3 Random Deck
 		table.insert(Option1,aux.Stringid(id,4)) --Choose 2 of 3 Random Deck
+		table.insert(Option1,aux.Stringid(id,5)) --Choose 1 Season Random Deck
 		local gamemod=Duel.SelectOption(tp,false,table.unpack(Option1))+1
 		for tp=0,1 do s[1][tp]=gamemod end
+		if s[1][tp]==5 then
+			s[2][tp]=Duel.SelectOption(tp,aux.Stringid(id,6),
+												aux.Stringid(id,7),
+												aux.Stringid(id,8),
+												aux.Stringid(id,9),
+												aux.Stringid(id,10))+2
+
+		end
 	end
 	--If Special then Special Mode
 	if s[1][tp]==1 then s.ChooseDeck(e,tp) return end
 	if s[1][tp]==2 then s.RandomDeck(e,tp) return end
 	if s[1][tp]==3 then s.Choose1Random3(e,tp) return end
 	if s[1][tp]==4 then s.Choose2Random3(e,tp) return end
+	if s[1][tp]==5 then s.SeasonDeck(e,tp) return end
 end
 function s.DeleteDeck(tp)
 	local del=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
@@ -209,6 +219,37 @@ function s.RelayOp(startlp,deckid)
 				end
 			end
 end
+function s.SeasonDeck(e,tp)
+	--Get Random Deck
+	local num
+	local decklist={}
+	for i=1,#s.Pack do
+		num=Duel.GetRandomNumber(1,#s.Pack[2][1])
+		table.insert(decklist,s.Pack[2][1][num][0])
+	end
+	--Get Random Deck
+	local decknum=Duel.GetRandomNumber(1,#s.Pack[2][1])
+	local deckid=s.Pack[2][1][decknum][0]
+	s.PlaceDeck(tp,deckid)
+	--Add Random Deck
+	local common=s.Pack[2][1][decknum][1]
+	local rare=s.Pack[2][1][decknum][2]
+	local srare=s.Pack[2][1][decknum][3]
+	local urare=s.Pack[2][1][decknum][4]
+	if rare~=0 then for _,v in ipairs(rare) do table.insert(common,v) end end
+	if srare~=0 then for _,v in ipairs(srare) do table.insert(common,v) end end
+	if urare~=0 then for _,v in ipairs(urare) do table.insert(common,v) end end
+	for code,code2 in ipairs(common) do
+		--Debug.AddCard(code2,tp,tp,LOCATION_DECK,1,POS_FACEDOWN):Cover(deckid)
+		local tc=Duel.CreateToken(tp,code2)
+		--tc:Cover(deckid)
+		Duel.SendtoDeck(tc,tp,1,REASON_RULE)
+	end
+	--Debug.ReloadFieldEnd()
+	local g=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_HAND+LOCATION_DECK,0)
+	Duel.ConfirmCards(tp,g)
+	Duel.ShuffleDeck(tp)
+end
 
 
 
@@ -221,7 +262,7 @@ end
 
 
 
-
+--s.Pack=[Format][Deck Type][Deck][Rare]
 s.Pack={}
 s.Pack[2]={} --TCG
 s.Pack[2][1]={} --Structure Deck
